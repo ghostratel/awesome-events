@@ -1,6 +1,6 @@
 {
   "name": "awsome-events",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node's event emitter for all engines.",
   "main": "dist/index.umd.min.js",
   "scripts": {
