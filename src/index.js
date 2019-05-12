@@ -53,6 +53,7 @@ Events.prototype.emit = function (eventName, ...args) {
   if (this._events.hasOwnProperty(eventName)) {
     let listeners = this._events[eventName]
     emitAllListeners.call(this, listeners, ...args)
+    listeners.length === 0 && delete this._events[eventName]
     return true
   } else {
     return false

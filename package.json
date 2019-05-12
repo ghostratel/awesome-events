@@ -4,6 +4,7 @@
   "description": "Node's event emitter for all engines.",
   "main": "dist/index.umd.min.js",
   "scripts": {
+    "test": "jest test",
     "dev": "bili --watch",
     "build": "bili"
   },
