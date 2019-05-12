@@ -35,7 +35,7 @@ Events.prototype.on = Events.prototype.addListener = function (eventName, listen
 Events.prototype.off = Events.prototype.removeListener = function (eventName, listener) {
   checkListener(listener)
   let listeners = this._events[eventName]
-  let listenerIndex = listeners.indexOf(listener)
+  let listenerIndex = listeners.lastIndexOf(listener)
   if (listenerIndex !== -1) {
     listeners.splice(listenerIndex, 1)
     // if no listeners, delete the event

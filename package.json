@@ -19,6 +19,11 @@
   },
   "homepage": "https://github.com/ghostratel/awsome-events#readme",
   "devDependencies": {
-    "bili": "^4.7.4"
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-jest": "^24.8.0",
+    "bili": "^4.7.4",
+    "jest": "^24.8.0",
+    "regenerator-runtime": "^0.13.2"
   }
 }
