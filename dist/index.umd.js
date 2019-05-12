@@ -1,7 +1,7 @@
 /*!
- * awsome-events v1.0.0
- * (c) 
- * Released under the ISC License.
+ * awsome-events v1.0.1
+ * (c) ghostratel
+ * Released under the MIT License.
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -94,7 +94,7 @@
   Events.prototype.off = Events.prototype.removeListener = function (eventName, listener) {
     checkListener(listener);
     var listeners = this._events[eventName];
-    var listenerIndex = listeners.indexOf(listener);
+    var listenerIndex = listeners.lastIndexOf(listener);
 
     if (listenerIndex !== -1) {
       listeners.splice(listenerIndex, 1); // if no listeners, delete the event
