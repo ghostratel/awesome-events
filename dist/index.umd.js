@@ -1,5 +1,5 @@
 /*!
- * awsome-events v1.0.1
+ * awsome-events v1.0.11
  * (c) ghostratel
  * Released under the MIT License.
  */
@@ -112,10 +112,15 @@
   Events.prototype.off = Events.prototype.removeListener = function (eventName, listener) {
     checkListener(listener);
     var listeners = this._events[eventName];
+    var context = this;
     var listenerIndex = findFromTail(listeners, function (_lisener) {
       var _funcName = _lisener.name.match(/bound\s(\w*)/) ? _lisener.name.match(/bound\s([_\w]*)/)[1] : _lisener.name;
 
-      return _funcName === listener.name && _lisener.toString() === listener.toString();
+      if (_lisener.once) {
+        return _funcName === listener.name && _lisener.toString() === listener.bind(context).toString();
+      } else {
+        return _funcName === listener.name && _lisener.toString() === listener.toString();
+      }
     });
 
     if (listenerIndex !== -1) {

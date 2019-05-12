@@ -4,14 +4,16 @@ let e = new Events()
 
 let cb1 = () => console.log(1)
 
-e.on('smile', cb1)
+e.once('smile', cb1)
 
 test('should ', () => {
-    let cb1 = () => console.log(1)
+    let cb2 = cb1
 
-    e.off('smile', cb1)
+    e.off('smile', cb2)
 
     e.emit('smile')
 
-    expect(e._events).not.toEqual({})
+    console.log(e);
+
+    expect(e._events).toEqual({})
 })
