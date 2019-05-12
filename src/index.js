@@ -36,8 +36,8 @@ Events.prototype.off = Events.prototype.removeListener = function (eventName, li
   checkListener(listener)
   let listeners = this._events[eventName]
   let listenerIndex = findFromTail(listeners, function(_lisener) {
-    let _funcName = _lisener.name.match(/bound\s(\w*)/) ? _lisener.name.match(/bound\s(\w*)/)[1] : _lisener.name
-    return _funcName === listener.name
+    let _funcName = _lisener.name.match(/bound\s(\w*)/) ? _lisener.name.match(/bound\s([_\w]*)/)[1] : _lisener.name
+    return _funcName === listener.name && _lisener.toString() === listener.toString()
   })
   if (listenerIndex !== -1) {
     listeners.splice(listenerIndex, 1)

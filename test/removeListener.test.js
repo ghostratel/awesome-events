@@ -1,6 +1,9 @@
 import Events from '../src/index.js'
+import { $removeAllListeners } from './testHelper.js'
 
 const eventEmitter = new Events()
+
+const eventEmitter2 = new Events()
 
 const eventName = 'smile'
 
@@ -52,4 +55,5 @@ test(`case5`, () => {
 test(`case6`, () => {
     eventEmitter.removeListener(eventName, cb2)
     expect(eventEmitter._events).toEqual({})
+    $removeAllListeners(eventEmitter)
 })

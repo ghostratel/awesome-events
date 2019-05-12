@@ -1,5 +1,5 @@
 import Events from '../src/index.js'
-import {$removeAllListeners} from './helper.js'
+import { $removeAllListeners } from './testHelper.js'
 
 const eventEmitter = new Events()
 
@@ -17,20 +17,20 @@ test(`case0`, () => {
 })
 
 test(`case1`, () => {
-    eventEmitter.on('smile', cb1)
-    eventEmitter.on('smile', cb3)
-    eventEmitter.on('laugh', cb2)
-    eventEmitter.removeAllListeners('smile')
-    expect(eventEmitter._events).toEqual({laugh: [cb2]})
-    $removeAllListeners(eventEmitter)
-  })
+  eventEmitter.on('smile', cb1)
+  eventEmitter.on('smile', cb3)
+  eventEmitter.on('laugh', cb2)
+  eventEmitter.removeAllListeners('smile')
+  expect(eventEmitter._events).toEqual({ laugh: [cb2] })
+  $removeAllListeners(eventEmitter)
+})
 
-  test(`case2`, () => {
-    eventEmitter.on('smile', cb1)
-    eventEmitter.on('laugh', cb2)
-    eventEmitter.on('cry', cb2)
-    eventEmitter.on('smile', cb3)
-    eventEmitter.removeAllListeners('smile')
-    expect(eventEmitter._events).toEqual({laugh: [cb2], cry: [cb2]})
-    $removeAllListeners(eventEmitter)
-  })
+test(`case2`, () => {
+  eventEmitter.on('smile', cb1)
+  eventEmitter.on('laugh', cb2)
+  eventEmitter.on('cry', cb2)
+  eventEmitter.on('smile', cb3)
+  eventEmitter.removeAllListeners('smile')
+  expect(eventEmitter._events).toEqual({ laugh: [cb2], cry: [cb2] })
+  $removeAllListeners(eventEmitter)
+})

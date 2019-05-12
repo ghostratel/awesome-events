@@ -1,4 +1,5 @@
 import Events from '../src/index.js'
+import {$removeAllListeners} from './testHelper.js'
 
 const eventEmitter = new Events()
 
@@ -13,6 +14,7 @@ test('case 0', () => {
     eventEmitter.once(eventName, cb1)
     eventEmitter.emit(eventName)
     expect(eventEmitter._events).toEqual({})
+    $removeAllListeners(eventEmitter)
 })
 
 test('case 1', () => {
@@ -20,6 +22,7 @@ test('case 1', () => {
     eventEmitter.once(eventName, cb1)
     eventEmitter.emit(eventName)
     expect(eventEmitter._events).toEqual({})
+    $removeAllListeners(eventEmitter)
 })
 
 test('case 2', () => {
@@ -27,6 +30,7 @@ test('case 2', () => {
     eventEmitter.once(eventName, cb2)
     eventEmitter.emit(eventName)
     expect(eventEmitter._events).toEqual({})
+    $removeAllListeners(eventEmitter)
 })
 
 test('case 3', () => {
@@ -37,4 +41,44 @@ test('case 3', () => {
 
     eventEmitter.emit(eventName)
     expect(eventEmitter._events).toEqual({smile: [cb3]})
+    $removeAllListeners(eventEmitter)
+})
+
+test('case 4', () => {
+    eventEmitter.on(eventName, cb3)
+    eventEmitter.once(eventName, cb4)
+    eventEmitter.once(eventName, cb3)
+    eventEmitter.on(eventName, cb4)
+
+    eventEmitter.emit(eventName)
+    
+    expect(eventEmitter._events).toEqual({smile: [cb3, cb4]})
+    $removeAllListeners(eventEmitter)
+})
+
+test('case 5', () => {
+    eventEmitter.once(eventName, cb1)
+    eventEmitter.once(eventName, cb2)
+    eventEmitter.once(eventName, cb3)
+    eventEmitter.once(eventName, cb4)
+    eventEmitter.once(eventName, cb1)
+
+    eventEmitter.emit(eventName)
+    
+    expect(eventEmitter._events).toEqual({})
+    $removeAllListeners(eventEmitter)
+})
+
+test('case 5', () => {
+    eventEmitter.once(eventName, cb1)
+    eventEmitter.once(eventName, cb2)
+    eventEmitter.once(eventName, cb3)
+    eventEmitter.once(eventName, cb4)
+    eventEmitter.once(eventName, cb1)
+
+    eventEmitter.on(eventName, cb2)
+    eventEmitter.emit(eventName)
+    
+    expect(eventEmitter._events).toEqual({smile: [cb2]})
+    $removeAllListeners(eventEmitter)
 })

@@ -54,6 +54,24 @@
     }
   }
 
+  function findFromTail(list, cb) {
+    var i = list.length;
+    var ret = -1;
+
+    while (i) {
+      --i;
+
+      var _ret = cb(list[i], i);
+
+      if (_ret) {
+        ret = i;
+        break;
+      }
+    }
+
+    return ret;
+  }
+
   var Events = function Events() {
     this._events = {};
 
@@ -94,7 +112,11 @@
   Events.prototype.off = Events.prototype.removeListener = function (eventName, listener) {
     checkListener(listener);
     var listeners = this._events[eventName];
-    var listenerIndex = listeners.lastIndexOf(listener);
+    var listenerIndex = findFromTail(listeners, function (_lisener) {
+      var _funcName = _lisener.name.match(/bound\s(\w*)/) ? _lisener.name.match(/bound\s([_\w]*)/)[1] : _lisener.name;
+
+      return _funcName === listener.name && _lisener.toString() === listener.toString();
+    });
 
     if (listenerIndex !== -1) {
       listeners.splice(listenerIndex, 1); // if no listeners, delete the event
@@ -118,6 +140,7 @@
       }
 
       emitAllListeners.call.apply(emitAllListeners, [this, listeners].concat(args));
+      listeners.length === 0 && delete this._events[eventName];
       return true;
     } else {
       return false;
@@ -126,8 +149,9 @@
 
   Events.prototype.once = function (eventName, listener) {
     checkListener(listener);
-    this.addListener(eventName, listener);
-    listener.once = true;
+    var bound = listener.bind(this);
+    this.addListener(eventName, bound);
+    bound.once = true;
     return this;
   };
 

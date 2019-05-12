@@ -1,5 +1,5 @@
 import Events from '../src/index.js'
-import { $removeAllListeners } from './helper'
+import { $removeAllListeners } from './testHelper.js'
 
 const eventEmitter = new Events()
 
