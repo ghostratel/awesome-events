@@ -20,6 +20,22 @@ function checkListener (listener) {
       listeners.warned = true
     }
   }
+
+  function findFromTail(list, cb){
+    let i = list.length
+    let ret = -1
+    while(i) {
+        --i
+        let _ret = cb(list[i], i)
+        if(_ret) {
+            ret = i
+            break
+        }
+    }
+    return ret
+}
+
   
   
-  export {checkListener, emitAllListeners, checkListenersLimit}
+  
+  export {checkListener, emitAllListeners, checkListenersLimit, findFromTail}

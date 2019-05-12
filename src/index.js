@@ -1,4 +1,4 @@
-import { checkListener, emitAllListeners, checkListenersLimit } from './helper.js'
+import { checkListener, emitAllListeners, checkListenersLimit, findFromTail } from './helper.js'
 
 const Events = function () {
   this._events = {}
@@ -35,7 +35,10 @@ Events.prototype.on = Events.prototype.addListener = function (eventName, listen
 Events.prototype.off = Events.prototype.removeListener = function (eventName, listener) {
   checkListener(listener)
   let listeners = this._events[eventName]
-  let listenerIndex = listeners.lastIndexOf(listener)
+  let listenerIndex = findFromTail(listeners, function(_lisener) {
+    let _funcName = _lisener.name.match(/bound\s(\w*)/) ? _lisener.name.match(/bound\s(\w*)/)[1] : _lisener.name
+    return _funcName === listener.name
+  })
   if (listenerIndex !== -1) {
     listeners.splice(listenerIndex, 1)
     // if no listeners, delete the event
@@ -62,8 +65,9 @@ Events.prototype.emit = function (eventName, ...args) {
 
 Events.prototype.once = function (eventName, listener) {
   checkListener(listener)
-  this.addListener(eventName, listener)
-  listener.once = true
+  let bound = listener.bind(this)
+  this.addListener(eventName, bound)
+  bound.once = true
   return this
 }
 
