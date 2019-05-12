@@ -16,12 +16,6 @@ Using npm:
 npm install awsome-events --save
 ```
 
-## documentation
-
-Options is very simple.
-
-- `el` (`String` or `Element`) The element that you want it to disappear.
-- `count` (`Number`) the canvas element will generate. By default is `10`, and modifying this option may affect performance.
 
 ## Usage example
 
