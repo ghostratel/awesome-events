@@ -1,4 +1,4 @@
-import Events from '../src/index.js'
+import Events from '../dist/index.umd.js'
 import { $removeAllListeners } from './testHelper.js'
 
 const eventEmitter = new Events()
