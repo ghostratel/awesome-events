@@ -70,4 +70,53 @@ test('case 4', () => {
     $reset()
 })
 
-// TODO: test once method
+
+test('case 5', () => {
+    eventEmitter.on('smile', cb1)
+    eventEmitter.on('smile', cb2)
+    eventEmitter.once('smile', cb3)
+    eventEmitter.emit('smile')
+    eventEmitter.removeListener('smile', cb1)
+    eventEmitter.emit('smile')
+    expect(listenerEmitCount).toEqual({ cb1: 1, cb2: 2, cb3: 1, cb4: 0 })
+    expect(eventEmitter._events).toEqual({smile: [cb2]})
+    $reset()
+})
+
+test('case 6', () => {
+    eventEmitter.once('smile', cb1)
+    eventEmitter.once('smile', cb2)
+    eventEmitter.once('smile', cb3)
+    eventEmitter.emit('smile')
+    eventEmitter.removeListener('smile', cb1)
+    eventEmitter.emit('smile')
+    expect(listenerEmitCount).toEqual({ cb1: 1, cb2: 1, cb3: 1, cb4: 0 })
+    $reset()
+})
+
+test('case 7', () => {
+    eventEmitter.once('smile', cb1)
+    eventEmitter.once('smile', cb2)
+    eventEmitter.once('smile', cb3)
+    eventEmitter.removeListener('smile', cb1)
+    eventEmitter.emit('smile')
+    eventEmitter.emit('smile')
+    expect(listenerEmitCount).toEqual({ cb1: 0, cb2: 1, cb3: 1, cb4: 0 })
+    expect(eventEmitter._events).toEqual({})
+    $reset()
+})
+
+test('case 8', () => {
+    eventEmitter.once('smile', cb1)
+    eventEmitter.once('smile', cb2)
+    eventEmitter.once('smile', cb3)
+    eventEmitter.removeListener('smile', cb1)
+    eventEmitter.emit('smile')
+    eventEmitter.on('smile', cb2)
+    eventEmitter.emit('smile')
+    expect(listenerEmitCount).toEqual({ cb1: 0, cb2: 2, cb3: 1, cb4: 0 })
+    expect(eventEmitter._events).toEqual({smile: [cb2]})
+    $reset()
+})
+
+//TODO: test more

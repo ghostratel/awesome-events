@@ -5,13 +5,13 @@ const Events = function () {
   let _maxListeners
 
   Object.defineProperty(this, '_maxListeners', {
-    get(){
+    get() {
       // when Events instance has '_maxListeners', use instance's '_maxListeners'
       // when Events instance don't has '_maxListeners', use Events.defaultMaxListeners
       return _maxListeners ? _maxListeners : this.defaultMaxListeners
     },
-    set(n){
-      if(n < 0 || isNaN(n) || typeof n !== 'number') {
+    set(n) {
+      if (n < 0 || isNaN(n) || typeof n !== 'number') {
         throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.')
       }
       _maxListeners = n
@@ -35,10 +35,11 @@ Events.prototype.on = Events.prototype.addListener = function (eventName, listen
 Events.prototype.off = Events.prototype.removeListener = function (eventName, listener) {
   checkListener(listener)
   let listeners = this._events[eventName]
+  if (!listeners) { return this }
   let context = this
-  let listenerIndex = findFromTail(listeners, function(_lisener) {
+  let listenerIndex = findFromTail(listeners, function (_lisener) {
     let _funcName = _lisener.name.match(/bound\s(\w*)/) ? _lisener.name.match(/bound\s([_\w]*)/)[1] : _lisener.name
-    if(_lisener.once) {
+    if (_lisener.once) {
       return _funcName === listener.name && _lisener.toString() === listener.bind(context).toString()
     } else {
       return _funcName === listener.name && _lisener.toString() === listener.toString()
@@ -117,38 +118,38 @@ Events.prototype.listeners = function (eventName) {
 }
 
 Events.prototype.setMaxListeners = function (n) {
-  if(n < 0 || isNaN(n) || typeof n !== 'number') {
+  if (n < 0 || isNaN(n) || typeof n !== 'number') {
     throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.')
   }
   this._maxListeners = n
 }
 
-Events.prototype.getMaxListeners = function() {
+Events.prototype.getMaxListeners = function () {
   return this._maxListeners
 }
 
 
-Events.prototype.rawListeners = function(eventName){
+Events.prototype.rawListeners = function (eventName) {
   let instance = this
   let listenrs = this._events[eventName] ? this._events[eventName].slice() : []
-  listenrs.length && (listenrs = listenrs.map(function(listener, _i) {
+  listenrs.length && (listenrs = listenrs.map(function (listener, _i) {
 
-    let f = function(){
-      if(listener.once) {
+    let f = function () {
+      if (listener.once) {
         instance.removeListener(eventName, listener)
         listenrs.splice(_i, 1)
-        if(listenrs.length === 0) {delete instance._events[eventName]}
+        if (listenrs.length === 0) { delete instance._events[eventName] }
       }
       listener()
     }
 
-    if(listener.once) {
-      f.listener = function(){
+    if (listener.once) {
+      f.listener = function () {
         listener()
       }
       f.listener.once = listener.once
     }
-   
+
 
     return f
   }))

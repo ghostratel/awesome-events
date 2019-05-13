@@ -33,3 +33,9 @@ test(`case4`, () => {
     expect(eventEmitter._events).toEqual({ 'smile': [cb1, cb2, cb4, cb3, cb2] })
 })
 
+test('case 5', () => {
+    eventEmitter.on('cry', cb2)
+    expect(eventEmitter._events).toEqual({ 'smile': [cb1, cb2, cb4, cb3, cb2], cry: [cb2] })
+})
+
+
