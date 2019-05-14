@@ -50,5 +50,21 @@ test('case 1', () => {
     expect(listeners.length).toEqual(1)
 
     expect(eventEmitter._events.smile.map(cb => cb.name)).toEqual(['bound cb2'])
+
+    reset()
+  })
+  
+
+  test('case 3', () => {
+    eventEmitter.on('smile', cb3)
+    eventEmitter.on('smile', cb4)
+    let listeners = eventEmitter.rawListeners('smile')
+    listeners[0]()
+    listeners[1]()
+    expect(listenerEmitCount).toEqual({cb1: 0, cb2: 0, cb3: 1, cb4: 1})
+    eventEmitter.off('smile', cb3)
+    expect(listeners.length).toEqual(2)
+    listeners.unshift()
+    expect(eventEmitter._events).toEqual({smile: [cb4]})
   })
   

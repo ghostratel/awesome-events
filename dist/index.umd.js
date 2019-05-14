@@ -1,5 +1,5 @@
 /*!
- * awsome-events v1.0.13
+ * awsome-events v1.0.15
  * (c) ghostratel
  * Released under the MIT License.
  */
@@ -228,14 +228,14 @@
 
   Events.prototype.rawListeners = function (eventName) {
     var instance = this;
-    var listenrs = this._events[eventName] ? this._events[eventName].slice() : [];
-    listenrs.length && (listenrs = listenrs.map(function (listener, _i) {
+    var listeners = this._events[eventName] ? this._events[eventName].slice() : [];
+    listeners.length && (listeners = listeners.map(function (listener, _i) {
       var f = function f() {
         if (listener.once) {
           instance.removeListener(eventName, listener);
-          listenrs.splice(_i, 1);
+          listeners.splice(_i, 1);
 
-          if (listenrs.length === 0) {
+          if (listeners.length === 0) {
             delete instance._events[eventName];
           }
         }
@@ -253,7 +253,7 @@
 
       return f;
     }));
-    return listenrs;
+    return listeners;
   };
 
   return Events;

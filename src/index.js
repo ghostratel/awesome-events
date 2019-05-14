@@ -133,14 +133,14 @@ Events.prototype.getMaxListeners = function () {
 
 Events.prototype.rawListeners = function (eventName) {
   let instance = this
-  let listenrs = this._events[eventName] ? this._events[eventName].slice() : []
-  listenrs.length && (listenrs = listenrs.map(function (listener, _i) {
+  let listeners = this._events[eventName] ? this._events[eventName].slice() : []
+  listeners.length && (listeners = listeners.map(function (listener, _i) {
 
     let f = function () {
       if (listener.once) {
         instance.removeListener(eventName, listener)
-        listenrs.splice(_i, 1)
-        if (listenrs.length === 0) { delete instance._events[eventName] }
+        listeners.splice(_i, 1)
+        if (listeners.length === 0) { delete instance._events[eventName] }
       }
       listener()
     }
@@ -156,7 +156,7 @@ Events.prototype.rawListeners = function (eventName) {
     return f
   }))
 
-  return listenrs
+  return listeners
 }
 
 export default Events
