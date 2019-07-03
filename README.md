@@ -1,4 +1,4 @@
-# awsome-events
+# awesome-events
 
 Node's event emitter for all engines.
 
@@ -7,13 +7,13 @@ Node's event emitter for all engines.
 In a browser:
 
 ```html
-<script src="awsome-events.js"></script>
+<script src="awesome-events.js"></script>
 ```
 
 Using npm:
 
 ```sh
-npm install awsome-events --save
+npm install awesome-events --save
 ```
 
 
@@ -21,7 +21,7 @@ npm install awsome-events --save
 
 ```js
 
-var EventEmitter = require('awsome-events')
+var EventEmitter = require('awesome-events')
 
 var logger = function (msg) { console.log(msg) }
 

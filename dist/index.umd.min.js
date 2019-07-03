@@ -1,5 +1,5 @@
 /*!
- * awsome-events v1.0.15
+ * awesome-events v1.0.15
  * (c) ghostratel
  * Released under the MIT License.
  */

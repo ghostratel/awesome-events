@@ -1,5 +1,5 @@
 {
-  "name": "awsome-events",
+  "name": "awesome-events",
   "version": "1.0.15",
   "description": "Node's event emitter for all engines.",
   "main": "dist/index.umd.min.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ghostratel/awsome-events.git"
+    "url": "git+https://github.com/ghostratel/awesome-events.git"
   },
   "keywords": [],
   "author": "ghostratel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ghostratel/awsome-events/issues"
+    "url": "https://github.com/ghostratel/awesome-events/issues"
   },
-  "homepage": "https://github.com/ghostratel/awsome-events#readme",
+  "homepage": "https://github.com/ghostratel/awesome-events#readme",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
