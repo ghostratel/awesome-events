@@ -168,7 +168,13 @@
   };
 
   Events.prototype.removeAllListeners = function (eventName) {
+    debugger;
     var listeners = this._events[eventName];
+
+    if (!listeners || listeners.length === 0) {
+      return;
+    }
+
     var l = listeners.length;
 
     while (l) {

@@ -80,6 +80,10 @@ Events.prototype.once = function (eventName, listener) {
 
 Events.prototype.removeAllListeners = function (eventName) {
   let listeners = this._events[eventName]
+
+  if(!listeners || listeners.length === 0) {
+    return
+  }
   let l = listeners.length
   while (l) {
     this._events['removeListener'] && emitAllListeners.call(this, this._events['removeListener'])

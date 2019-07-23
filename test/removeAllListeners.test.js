@@ -34,3 +34,9 @@ test(`case2`, () => {
   expect(eventEmitter._events).toEqual({ laugh: [cb2], cry: [cb2] })
   $removeAllListeners(eventEmitter)
 })
+
+test(`case3`, () => {
+  const ee = new Events()
+  ee.removeAllListeners('smile')
+  expect(eventEmitter._events).toEqual({})
+})
