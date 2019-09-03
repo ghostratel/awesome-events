@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ghostratel/awesome-events.git"
+    "url": "git+https://github.com/wicked-knife/awesome-events.git"
   },
   "keywords": [],
   "author": "ghostratel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ghostratel/awesome-events/issues"
+    "url": "https://github.com/wicked-knife/awesome-events/issues"
   },
-  "homepage": "https://github.com/ghostratel/awesome-events#readme",
+  "homepage": "https://github.com/wicked-knife/awesome-events#readme",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
